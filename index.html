@@ -2,114 +2,86 @@
 <html lang="si">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agri Smart Sri Lanka</title>
-
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #eef7ee;
-    margin: 0;
-    padding: 15px;
-}
-header {
-    background: #16823b;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    border-radius: 12px;
-}
-h2 {
-    color: #167239;
-}
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-button {
-    background: white;
-    border: 2px solid #16823b;
-    border-radius: 10px;
-    padding: 15px 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-button:active {
-    background: #b9e8bd;
-}
-#details {
-    background: white;
-    padding: 18px;
-    margin-top: 20px;
-    border-radius: 12px;
-    min-height: 60px;
-}
+body{font-family:Arial;background:#edf7ed;margin:0;padding:12px}
+header{background:#16823b;color:white;text-align:center;padding:15px;border-radius:12px}
+h2{color:#16823b}
+.item{background:white;margin:10px 0;padding:14px;border-radius:10px;border:1px solid #16823b}
+.name{font-size:18px;font-weight:bold;color:#176b32;cursor:pointer}
+.info{display:none;padding:12px;background:#f0fff0;margin-top:10px;border-radius:8px;line-height:1.8}
 </style>
 </head>
-
 <body>
 
 <header>
-<h1>🌱 Agri Smart Sri Lanka</h1>
-<p>ශ්‍රී ලංකාවේ ගොවි ජනතාව වෙනුවෙන්</p>
+<h2>🌱 Agri Smart Sri Lanka</h2>
+<p>ගොවි ජනතාව වෙනුවෙන්</p>
 </header>
 
 <h2>🥬 එළවළු වර්ග</h2>
-<div class="grid" id="vegetables"></div>
+<div id="vegetables"></div>
 
 <h2>🍎 පලතුරු වර්ග</h2>
-<div class="grid" id="fruits"></div>
-
-<div id="details">
-<h3>🌾 කෘෂිකාර්මික තොරතුරු</h3>
-<p>ඔබට අවශ්‍ය එළවළුවක් හෝ පලතුරක් තෝරන්න.</p>
-</div>
+<div id="fruits"></div>
 
 <script>
 
-const vegetables = [
-"වම්බටු","මිරිස්","මාළු මිරිස්",
-"තක්කාලි","බණ්ඩක්කා","වට්ටක්කා",
-"කැරට්","බීට්","බෝංචි",
-"ගෝවා","පිපිඤ්ඤා","කරවිල",
-"පතෝල","වැටකොළු","මෑකරල්",
-"රාබු","නෝකෝල්","ලීක්ස්",
-"නිවිති","කංකුං"
+const vegetables=[
+"වට්ටක්කා","තක්කාලි","බණ්ඩක්කා","වම්බටු",
+"මාළු මිරිස්","අමු මිරිස්","කැරට්","බීට්",
+"බෝංචි","ගෝවා","පිපිඤ්ඤා","කරවිල",
+"පතෝල","වැටකොළු","මෑකරල්","රාබු",
+"නෝකෝල්","ලීක්ස්","නිවිති","කංකුං"
 ];
 
-const fruits = [
-"අඹ","කෙසෙල්","පැපොල්",
-"කොමඩු","පේර","දෙහි",
-"අන්නාසි","දොඩම්","දෙළුම්",
-"රඹුටන්","අලිගැටපේර","දිවුල්",
-"අනෝදා","පැෂන්","මිදි",
-"කාමරංකා","නෙල්ලි","ලොවි",
-"ජම්බු","වෙරළු"
+const fruits=[
+"කෙසෙල්","අඹ","පැපොල්","අන්නාසි",
+"පේර","කොමඩු","දෙහි","දොඩම්",
+"දෙළුම්","රඹුටන්","අලිගැටපේර","දිවුල්",
+"අනෝදා","පැෂන්","මිදි","කාමරංකා",
+"නෙල්ලි","ලොවි","ජම්බු","වෙරළු"
 ];
 
-function loadItems(items, id) {
-    const area = document.getElementById(id);
+function showItems(list,id){
+let area=document.getElementById(id);
 
-    items.forEach(item => {
-        const btn = document.createElement("button");
-        btn.textContent = item;
-        btn.onclick = () => showDetails(item);
-        area.appendChild(btn);
-    });
+list.forEach(name=>{
+let box=document.createElement("div");
+box.className="item";
+
+let title=document.createElement("div");
+title.className="name";
+title.innerText="🌱 "+name+" ▼";
+
+let info=document.createElement("div");
+info.className="info";
+info.innerHTML=`
+<h3>${name} වගා විස්තර</h3>
+<p>🌱 සිටුවීමේ කාලය: ප්‍රදේශයේ කාලගුණය අනුව තෝරාගන්න.</p>
+<p>🌾 බීජ ප්‍රමාණය: වර්ගය අනුව වෙනස් වේ.</p>
+<p>🧪 පොහොර: පස පරීක්ෂා කර නිර්දේශ අනුව යොදන්න.</p>
+<p>💧 ජලය: පසෙහි තෙතමනය අනුව සපයන්න.</p>
+<p>🐛 රෝග පාලනය: වගාව නිතර පරීක්ෂා කරන්න.</p>
+<p>📅 අස්වනු කාලය: බෝගයේ වර්ගය අනුව වෙනස් වේ.</p>
+<p>💰 වෙළෙඳපොළ මිල: දිනපතා වෙනස් වේ.</p>
+`;
+
+title.onclick=()=>{
+info.style.display=info.style.display==="block"?"none":"block";
+title.innerText="🌱 "+name+(info.style.display==="block"?" ▲":" ▼");
+};
+
+box.appendChild(title);
+box.appendChild(info);
+area.appendChild(box);
+});
 }
 
-function showDetails(name) {
-    document.getElementById("details").innerHTML =
-    "<h2>🌱 " + name + "</h2>" +
-    "<p>වගා කිරීමේ විස්තර</p>" +
-    "<p>සිටුවීමේ කාලය, බීජ ප්‍රමාණය, පොහොර යෙදීම, ජලය සැපයීම සහ අස්වනු නෙළීම පිළිබඳ තොරතුරු ඉදිරියේදී මෙහි ඇතුළත් කරනු ලැබේ.</p>";
-}
-
-loadItems(vegetables, "vegetables");
-loadItems(fruits, "fruits");
+showItems(vegetables,"vegetables");
+showItems(fruits,"fruits");
 
 </script>
-
 </body>
 </html>
