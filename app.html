@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agri Smart Sri Lanka</title>
+<style>
+body{font-family:Arial;background:#eaf5e9;margin:0;text-align:center}
+header{background:green;color:white;padding:25px}
+.card{background:white;margin:15px;padding:20px;border-radius:12px}
+button{background:green;color:white;padding:12px 25px;border:0;border-radius:8px;font-size:17px}
+#details{background:white;margin:15px;padding:20px;border-radius:12px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🌱 Agri Smart Sri Lanka</h1>
+<p>ගොවි ජනතාව වෙනුවෙන්</p>
+</header>
+
+<div class="card">
+<h2>🥬 එළවළු</h2>
+<button onclick="show('vegetables')">විස්තර බලන්න</button>
+</div>
+
+<div class="card">
+<h2>🍉 පලතුරු</h2>
+<button onclick="show('fruits')">විස්තර බලන්න</button>
+</div>
+
+<div class="card">
+<h2>🌾 වගා උපදෙස්</h2>
+<button onclick="show('farming')">විස්තර බලන්න</button>
+</div>
+
+<div id="details">විස්තර මෙතැන පෙන්වයි.</div>
+
+<script>
+function show(type){
+let data={
+vegetables:"එළවළු: වම්බටු, මිරිස්, තක්කාලි, බණ්ඩක්කා, වට්ටක්කා, කැරට්.",
+fruits:"පලතුරු: අඹ, කෙසෙල්, පැපොල්, කොමඩු, පේර, දෙහි.",
+farming:"වගාවට පෙර පස සකස් කරන්න. හොඳ බීජ තෝරාගෙන නිසි ජලය ලබා දෙන්න."
+};
+document.getElementById("details").innerHTML="<h3>"+data[type]+"</h3>";
+}
+</script>
+
+</body>
+</html>
