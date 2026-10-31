@@ -4,16 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agri Smart Sri Lanka</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#eef7e9;margin:0;text-align:center}
-header{background:#16833b;color:white;padding:25px}
-h1{margin:0}
-.container{padding:15px}
-.card{background:white;padding:20px;margin:12px;border-radius:12px;box-shadow:0 2px 8px #ccc}
-button{background:#16833b;color:white;border:0;padding:12px 20px;border-radius:8px;font-size:16px}
-#details{background:white;padding:20px;margin:15px;border-radius:12px}
+body {
+    font-family: Arial, sans-serif;
+    background: #eef7ee;
+    margin: 0;
+    padding: 15px;
+}
+header {
+    background: #16823b;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+}
+h2 {
+    color: #167239;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+button {
+    background: white;
+    border: 2px solid #16823b;
+    border-radius: 10px;
+    padding: 15px 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+button:active {
+    background: #b9e8bd;
+}
+#details {
+    background: white;
+    padding: 18px;
+    margin-top: 20px;
+    border-radius: 12px;
+    min-height: 60px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -21,34 +55,61 @@ button{background:#16833b;color:white;border:0;padding:12px 20px;border-radius:8
 <p>ශ්‍රී ලංකාවේ ගොවි ජනතාව වෙනුවෙන්</p>
 </header>
 
-<div class="container">
-<div class="card">
-<h2>🥬 එළවළු</h2>
-<button onclick="show('vegetables')">විස්තර බලන්න</button>
-</div>
+<h2>🥬 එළවළු වර්ග</h2>
+<div class="grid" id="vegetables"></div>
 
-<div class="card">
-<h2>🍉 පලතුරු</h2>
-<button onclick="show('fruits')">විස්තර බලන්න</button>
-</div>
+<h2>🍎 පලතුරු වර්ග</h2>
+<div class="grid" id="fruits"></div>
 
-<div class="card">
-<h2>🌾 වගා උපදෙස්</h2>
-<button onclick="show('farming')">විස්තර බලන්න</button>
-</div>
-
-<div class="card">
-<h2>🧪 පොහොර සහ රෝග පාලනය</h2>
-<button onclick="show('fertilizer')">විස්තර බලන්න</button>
-</div>
-
-<div id="details">මෙතැන විස්තර පෙන්වනු ලැබේ.</div>
+<div id="details">
+<h3>🌾 කෘෂිකාර්මික තොරතුරු</h3>
+<p>ඔබට අවශ්‍ය එළවළුවක් හෝ පලතුරක් තෝරන්න.</p>
 </div>
 
 <script>
-function show(type){
-let data={
-vegetables:"එළවළු වර්ග: වම්බටු, මිරිස්, තක්කාලි, බණ්ඩක්කා, වට්ටක්කා, කැරට්.",
-fruits:"පලතුරු වර්ග: අඹ, කෙසෙල්, පැපොල්, කොමඩු, පේර, දෙහි.",
-farming:"වගාවට පෙර පස සකස් කරන්න. සුදුසු බීජ තෝරා ගන්න. නිසි ජල සැපයුම ලබා දෙන්න.",
-fertilizer:"පස පරීක්ෂා කර නිර්දේශිත පො
+
+const vegetables = [
+"වම්බටු","මිරිස්","මාළු මිරිස්",
+"තක්කාලි","බණ්ඩක්කා","වට්ටක්කා",
+"කැරට්","බීට්","බෝංචි",
+"ගෝවා","පිපිඤ්ඤා","කරවිල",
+"පතෝල","වැටකොළු","මෑකරල්",
+"රාබු","නෝකෝල්","ලීක්ස්",
+"නිවිති","කංකුං"
+];
+
+const fruits = [
+"අඹ","කෙසෙල්","පැපොල්",
+"කොමඩු","පේර","දෙහි",
+"අන්නාසි","දොඩම්","දෙළුම්",
+"රඹුටන්","අලිගැටපේර","දිවුල්",
+"අනෝදා","පැෂන්","මිදි",
+"කාමරංකා","නෙල්ලි","ලොවි",
+"ජම්බු","වෙරළු"
+];
+
+function loadItems(items, id) {
+    const area = document.getElementById(id);
+
+    items.forEach(item => {
+        const btn = document.createElement("button");
+        btn.textContent = item;
+        btn.onclick = () => showDetails(item);
+        area.appendChild(btn);
+    });
+}
+
+function showDetails(name) {
+    document.getElementById("details").innerHTML =
+    "<h2>🌱 " + name + "</h2>" +
+    "<p>වගා කිරීමේ විස්තර</p>" +
+    "<p>සිටුවීමේ කාලය, බීජ ප්‍රමාණය, පොහොර යෙදීම, ජලය සැපයීම සහ අස්වනු නෙළීම පිළිබඳ තොරතුරු ඉදිරියේදී මෙහි ඇතුළත් කරනු ලැබේ.</p>";
+}
+
+loadItems(vegetables, "vegetables");
+loadItems(fruits, "fruits");
+
+</script>
+
+</body>
+</html>
