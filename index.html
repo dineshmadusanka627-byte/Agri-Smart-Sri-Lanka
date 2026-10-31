@@ -4,162 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agri Smart Sri Lanka</title>
-
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#f1f8e9;
- color:#263238;
-}
-header{
- background:#087b35;
- color:white;
- text-align:center;
- padding:24px 12px;
-}
-header h1{margin:0;font-size:25px}
-header p{margin:8px 0 0}
-nav{
- display:flex;
- gap:8px;
- padding:12px;
- background:#075d2b;
-}
-nav button{
- flex:1;
- background:white;
- color:#087b35;
- border:0;
- padding:11px 3px;
- border-radius:8px;
- font-weight:bold;
-}
-.container{padding:14px}
-.search{
- width:100%;
- padding:14px;
- border:1px solid #ccc;
- border-radius:10px;
- font-size:16px;
- margin-bottom:12px;
-}
-.section-title{
- color:#087b35;
- margin-top:22px;
-}
-.grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
-}
-.card{
- background:white;
- padding:15px 10px;
- border-radius:12px;
- text-align:center;
- box-shadow:0 2px 6px #ccc;
-}
-.card .emoji{font-size:35px}
-.card h3{margin:8px 0;color:#087b35}
-.card p{font-size:13px}
-.card button,.action{
- background:#087b35;
- color:white;
- border:0;
- padding:11px;
- border-radius:8px;
- width:100%;
- font-size:14px;
-}
-#details{
- display:none;
- background:white;
- padding:18px;
- border-radius:12px;
- margin-top:15px;
- box-shadow:0 2px 8px #bbb;
- line-height:1.7;
-}
-.info{
- background:#e8f5e9;
- padding:12px;
- border-radius:8px;
- margin:10px 0;
-}
-footer{
- background:#075d2b;
- color:white;
- text-align:center;
- padding:20px;
- margin-top:25px;
-}
+body{font-family:Arial,sans-serif;background:#eef7e9;margin:0;text-align:center}
+header{background:#16833b;color:white;padding:25px}
+h1{margin:0}
+.container{padding:15px}
+.card{background:white;padding:20px;margin:12px;border-radius:12px;box-shadow:0 2px 8px #ccc}
+button{background:#16833b;color:white;border:0;padding:12px 20px;border-radius:8px;font-size:16px}
+#details{background:white;padding:20px;margin:15px;border-radius:12px}
 </style>
 </head>
-
 <body>
 
 <header>
 <h1>🌱 Agri Smart Sri Lanka</h1>
-<p>සාර්ථක ගොවිතැනකට නවීන තාක්ෂණය</p>
-<p>Smart Farming for Every Farmer</p>
+<p>ශ්‍රී ලංකාවේ ගොවි ජනතාව වෙනුවෙන්</p>
 </header>
 
-<nav>
-<button onclick="showCategory('all')">සියල්ල</button>
-<button onclick="showCategory('veg')">එළවළු</button>
-<button onclick="showCategory('fruit')">පලතුරු</button>
-</nav>
-
 <div class="container">
-
-<h2 class="section-title">🌾 වගා තොරතුරු</h2>
-
-<input class="search" id="search"
-placeholder="වගාවක් සොයන්න... (Search)"
-oninput="render()">
-
-<div class="grid" id="crops"></div>
-
-<div id="details"></div>
-
-<h2 class="section-title">👨‍🌾 ගොවි උපදෙස්</h2>
-
 <div class="card">
-<div class="emoji">💧</div>
-<h3>ජල කළමනාකරණය</h3>
-<p>වගාවට අවශ්‍ය ප්‍රමාණයට ජලය ලබා දෙන්න. ජලය රැඳීම වැළැක්වීමට කටයුතු කරන්න.</p>
+<h2>🥬 එළවළු</h2>
+<button onclick="show('vegetables')">විස්තර බලන්න</button>
 </div>
 
 <div class="card">
-<div class="emoji">🌱</div>
-<h3>පොහොර කළමනාකරණය</h3>
-<p>පාංශු පරීක්ෂණයක් අනුව සහ නිර්දේශිත පොහොර උපදෙස් අනුව පොහොර යොදන්න.</p>
+<h2>🍉 පලතුරු</h2>
+<button onclick="show('fruits')">විස්තර බලන්න</button>
 </div>
 
 <div class="card">
-<div class="emoji">🐛</div>
-<h3>රෝග සහ පළිබෝධ පාලනය</h3>
-<p>වගාව නිතර පරීක්ෂා කරන්න. රෝග ලක්ෂණ දුටු විට කෘෂිකර්ම නිලධාරී උපදෙස් ලබාගන්න.</p>
+<h2>🌾 වගා උපදෙස්</h2>
+<button onclick="show('farming')">විස්තර බලන්න</button>
 </div>
 
 <div class="card">
-<div class="emoji">📅</div>
-<h3>වගා කාලය</h3>
-<p>ප්‍රදේශයේ කාලගුණය සහ වාරි ජලය අනුව සුදුසු වගා කාලය තෝරාගන්න.</p>
+<h2>🧪 පොහොර සහ රෝග පාලනය</h2>
+<button onclick="show('fertilizer')">විස්තර බලන්න</button>
 </div>
 
+<div id="details">මෙතැන විස්තර පෙන්වනු ලැබේ.</div>
 </div>
-
-<footer>
-<h3>🌱 Agri Smart Sri Lanka</h3>
-<p>ගොවියාගේ දියුණුව රටේ දියුණුවයි.</p>
-<p>© 2026 Agri Smart Sri Lanka</p>
-</footer>
 
 <script>
-
-const data=[
-
-["වට්ටක්කා","veg","🎃","මාස 3-4","බීජ මගින්","පැළ අතර මීටර් 1-2 පමණ;
+function show(type){
+let data={
+vegetables:"එළවළු වර්ග: වම්බටු, මිරිස්, තක්කාලි, බණ්ඩක්කා, වට්ටක්කා, කැරට්.",
+fruits:"පලතුරු වර්ග: අඹ, කෙසෙල්, පැපොල්, කොමඩු, පේර, දෙහි.",
+farming:"වගාවට පෙර පස සකස් කරන්න. සුදුසු බීජ තෝරා ගන්න. නිසි ජල සැපයුම ලබා දෙන්න.",
+fertilizer:"පස පරීක්ෂා කර නිර්දේශිත පො
