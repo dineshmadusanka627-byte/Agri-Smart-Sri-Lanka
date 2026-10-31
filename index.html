@@ -1,58 +1,226 @@
-if(name==="තක්කාලි"){
-return `
-<h3>🍅 තක්කාලි වගාවේ සම්පූර්ණ විස්තර</h3>
-
-<b>🌤️ සුදුසු දේශගුණය</b>
-<p>සෙල්සියස් අංශක 21-24 අතර උෂ්ණත්වය සුදුසුයි.</p>
-
-<b>🌱 සුදුසු පස</b>
-<p>හොඳින් ජලය බැස යන පසක් අවශ්‍යයි. pH 5.5-7.5.</p>
-
-<b>📅 තවාන් දැමීම</b>
-<p>මාර්තු මැද හෝ අගෝස්තු අග සුදුසු කාලයන් වේ.</p>
-
-<b>🌾 බීජ ප්‍රමාණය</b>
-<p>හෙක්ටයාරයකට ග්‍රෑම් 200-250ක් පමණ.</p>
-<p>අක්කරයකට ග්‍රෑම් 81-101ක් පමණ.</p>
-
-<b>🌿 පැළ සිටුවීම</b>
-<p>බීජ වැපිරීමෙන් දින 14-18කට පසු නිරෝගී පැළ සිටුවන්න.</p>
-
-<b>📏 පැළ අතර පරතරය</b>
-<p>සෙ.මී. 80 × 50</p>
-
-<b>🧪 කාබනික පොහොර</b>
-<p>හෙක්ටයාරයකට හොඳින් දිරූ කාබනික පොහොර ටොන් 10ක් පමණ.</p>
-
-<b>🧪 රසායනික පොහොර</b>
-<p>අක්කරයකට ආසන්න ප්‍රමාණ:</p>
-<p>මූලික පොහොර (සිටුවීමට පෙර):</p>
-<p>Urea - 26 kg</p>
-<p>TSP - 132 kg</p>
-<p>MOP - 26 kg</p>
-
-<p>සිටුවා සති 3කට පසු:</p>
-<p>Urea - 26 kg</p>
-
-<p>සිටුවා සති 6කට පසු:</p>
-<p>Urea - 26 kg</p>
-<p>MOP - 26 kg</p>
-
-<b>💧 ජලය</b>
-<p>ප්‍රමාණවත් ලෙස ජලය සපයන්න. අධික ජලය නිසා ගෙඩි පැලීමට ඉඩ ඇත.</p>
-
-<b>🐛 රෝග හා පළිබෝධ</b>
-<p>වගාව නිතර පරීක්ෂා කරන්න. රෝගී පැළ ඉවත් කර අවශ්‍ය විට කෘෂිකර්ම උපදේශකගේ උපදෙස් ලබාගන්න.</p>
-
-<b>📦 අස්වැන්න</b>
-<p>ගෙඩි කොළ පැහැයෙන් කහ පැහැයට හැරෙන අවස්ථාවේ නෙළන්න.</p>
-
-<b>🌾 සාමාන්‍ය අස්වැන්න</b>
-<p>හෙක්ටයාරයකට ටොන් 20-30ක් පමණ.</p>
-
-<b>💰 වෙළෙඳපොළ මිල</b>
-<p>දෛනික වෙළෙඳපොළ මිල අනුව වෙනස් වේ.</p>
-
-<p><a href="https://doa.gov.lk/sinhala-hordi-crop-tomato/" target="_blank">📖 කෘෂිකර්ම දෙපාර්තමේන්තුවේ නිර්දේශ</a></p>
-`;
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agri Smart Sri Lanka</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f8e9;
+  margin: 0;
+  color: #263b25;
 }
+header {
+  background: #176b35;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  flex-wrap: wrap;
+}
+button {
+  background: #258344;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover { background: #125c2b; }
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 15px;
+}
+input {
+  width: 90%;
+  padding: 13px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  font-size: 16px;
+  margin: 10px;
+}
+.card {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px #ccc;
+}
+.card button {
+  width: 100%;
+  text-align: left;
+}
+#details {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  line-height: 1.8;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #176b35;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🌱 Agri Smart Sri Lanka</h1>
+<p>ශ්‍රී ලංකාවේ ගොවීන් සඳහා කෘෂිකාර්මික දැනුම</p>
+</header>
+
+<nav>
+<button onclick="showCategory('vegetables')">🥬 එළවළු</button>
+<button onclick="showCategory('fruits')">🍉 පලතුරු</button>
+<button onclick="showCategory('all')">සියල්ල</button>
+</nav>
+
+<main>
+<input type="text" id="search" placeholder="වගාවක් සොයන්න..." oninput="searchCrop()">
+
+<div id="list"></div>
+<div id="details"></div>
+</main>
+
+<footer>
+<p>Agri Smart Sri Lanka © 2026</p>
+<p>ගොවිතැන දියුණු කරමු 🇱🇰</p>
+</footer>
+
+<script>
+
+const vegetables = [
+"තක්කාලි","අළු පුහුල්","වට්ටක්කා","රාජා වට්ටක්කා",
+"බණ්ඩක්කා","වම්බටු","මිරිස්","මාළු මිරිස්",
+"කරවිල","පතෝල","වැටකොළු","පිපිඤ්ඤා",
+"බෝංචි","ගෝවා","කැරට්","බීට්",
+"ලීක්ස්","රාබු","නෝකෝල්","මෑකරල්",
+"දඹල","මඤ්ඤොක්කා","බතල","ඉඟුරු","කහ",
+"නිවිති","කංකුං","මුකුණුවැන්න","තිබ්බටු",
+"කැකිරි","ලබු"
+];
+
+const fruits = [
+"කෙසෙල්","අඹ","පැපොල්","අන්නාසි","පේර",
+"කොමඩු","දෙහි","දොඩම්","අලිගැටපේර","දිවුල්",
+"වෙරළු","දෙළුම්","රඹුටන්","මැංගුස්","ජම්බු",
+"කටු අනෝදා","බෙලි","කාමරංකා","නෙල්ලි",
+"අනෝදා","මිදි","පැෂන් ෆෘට්","ඩ්‍රැගන් ෆෘට්"
+];
+
+let currentCategory = "all";
+
+function showCategory(category) {
+ currentCategory = category;
+ document.getElementById("search").value = "";
+ displayList();
+ document.getElementById("details").innerHTML =
+ "<h3>🌱 වගාවක් තෝරන්න</h3><p>සම්පූර්ණ විස්තර බැලීමට වගාවක් තෝරන්න.</p>";
+}
+
+function displayList() {
+ let list = document.getElementById("list");
+ list.innerHTML = "";
+
+ let crops = currentCategory === "vegetables" ? vegetables :
+ currentCategory === "fruits" ? fruits :
+ [...vegetables,...fruits];
+
+ crops.forEach(name => {
+  list.innerHTML += `
+  <div class="card">
+  <button onclick="showDetails('${name}')">${name} - වගා විස්තර</button>
+  </div>`;
+ });
+}
+
+function searchCrop() {
+ let q = document.getElementById("search").value;
+ let list = document.getElementById("list");
+
+ let crops = [...vegetables,...fruits].filter(x => x.includes(q));
+
+ list.innerHTML = "";
+ crops.forEach(name => {
+  list.innerHTML += `
+  <div class="card">
+  <button onclick="showDetails('${name}')">${name} - වගා විස්තර</button>
+  </div>`;
+ });
+}
+
+function showDetails(name) {
+
+ let isFruit = fruits.includes(name);
+
+ let info = `
+ <h2>🌱 ${name} වගාවේ විස්තර</h2>
+
+ <h3>🌤️ සුදුසු දේශගුණය</h3>
+ <p>හොඳ හිරු එළිය සහ වගාවට සුදුසු උෂ්ණත්වයක් අවශ්‍ය වේ. ප්‍රදේශයේ දේශගුණයට ගැළපෙන ප්‍රභේදයක් තෝරාගන්න.</p>
+
+ <h3>🌱 සුදුසු පස</h3>
+ <p>කාබනික ද්‍රව්‍ය බහුල, හොඳින් ජලය බැස යන පසක් සුදුසුය. පස පරීක්ෂා කිරීම වැදගත් වේ.</p>
+
+ <h3>📅 වගා කාලය</h3>
+ <p>මහ සහ යල කන්නවල වර්ෂාපතනය හා ප්‍රදේශීය තත්ත්ව අනුව වගා කාලය තෝරාගන්න.</p>
+
+ <h3>🌾 බීජ හා පැළ</h3>
+ <p>ගුණාත්මක, සහතික කළ බීජ හෝ නිරෝගී පැළ භාවිත කරන්න. නිර්දේශිත පරතරය අනුව සිටුවන්න.</p>
+
+ <h3>🧪 කාබනික පොහොර</h3>
+ <p>හොඳින් දිරූ කොම්පෝස්ට් හෝ ගොම පොහොර යොදන්න. ප්‍රමාණය පස සහ වගා ක්‍රමය අනුව වෙනස් වේ.</p>
+
+ <h3>🧪 රසායනික පොහොර</h3>
+ <p>පස පරීක්ෂා කර කෘෂිකර්ම දෙපාර්තමේන්තුවේ නිර්දේශ අනුව පොහොර යොදන්න. සියලු වගාවන්ට එකම පොහොර ප්‍රමාණය සුදුසු නොවේ.</p>
+
+ <h3>💧 ජලය</h3>
+ <p>පසෙහි අවශ්‍ය තෙතමනය පවත්වා ගන්න. ජලය රැඳීම වැළැක්විය යුතුය.</p>
+
+ <h3>🐛 රෝග හා පළිබෝධ</h3>
+ <p>පත්‍ර, කඳ, මුල් සහ ගෙඩි නිතර පරීක්ෂා කරන්න. රෝගී කොටස් ඉවත් කර වගාව පිරිසිදුව තබන්න.</p>
+
+ <h3>🩺 ප්‍රතිකාර</h3>
+ <p>රෝගය නිවැරදිව හඳුනාගෙන කෘෂිකර්ම උපදේශකගේ නිර්දේශ අනුව ප්‍රතිකාර කරන්න. හඳුනා නොගත් රෝගයකට අනුමානයෙන් කෘමිනාශක භාවිත නොකරන්න.</p>
+
+ <h3>📦 අස්වැන්න</h3>
+ <p>වගාවට අදාළ නිසි පරිණත අවස්ථාවේ අස්වැන්න නෙළාගන්න.</p>
+
+ <h3>💰 වෙළෙඳපොළ මිල</h3>
+ <p>දෛනික වෙළෙඳපොළ මිල අනුව වෙනස් වේ.</p>
+
+ <h3>📖 වැඩිදුර තොරතුරු</h3>
+ <p><a href="https://doa.gov.lk/" target="_blank">කෘෂිකර්ම දෙපාර්තමේන්තුව</a></p>
+ `;
+
+ if(name === "තක්කාලි") {
+ info += `
+ <hr>
+ <h3>🍅 තක්කාලි සඳහා අමතර උපදෙස්</h3>
+ <p>සුදුසු උෂ්ණත්වය සෙල්සියස් අංශක 21-24 පමණ වේ.</p>
+ <p>පසෙහි pH අගය 5.5-7.5 අතර වීම සුදුසුය.</p>
+ <p>නිරෝගී පැළ තෝරා නිර්දේශිත පරතරයට සිටුවන්න.</p>
+ <p>ගෙඩි කොළ පැහැයෙන් පරිණත වර්ණයට හැරෙන අවස්ථාවේ නෙළාගත හැකිය.</p>
+ `;
+ }
+
+ document.getElementById("details").innerHTML = info;
+ window.scrollTo({top:document.getElementById("details").offsetTop,behavior:"smooth"});
+}
+
+showCategory("all");
+
+</script>
+</body>
+</html>
