@@ -9,125 +9,128 @@
 *{box-sizing:border-box}
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f1f8e9;
-color:#263238;
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f1f8e9;
+ color:#263238;
 }
 
 header{
-background:#167c36;
-color:white;
-text-align:center;
-padding:22px 10px;
+ background:#167c36;
+ color:white;
+ text-align:center;
+ padding:22px 10px;
 }
 
-header h1{margin:0;font-size:25px}
+header h1{margin:0;font-size:24px}
 header p{margin:8px 0 0}
 
 nav{
-display:flex;
-gap:8px;
-padding:12px;
-justify-content:center;
-flex-wrap:wrap;
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ background:#105c29;
 }
 
-button{
-border:0;
-padding:11px 17px;
-border-radius:8px;
-background:#167c36;
-color:white;
-font-size:15px;
-cursor:pointer;
+nav button{
+ background:none;
+ border:0;
+ color:white;
+ padding:13px 10px;
+ font-size:14px;
+ cursor:pointer;
 }
 
-button:hover{background:#0d5725}
-
-.search{
-width:92%;
-margin:10px 4%;
-padding:13px;
-border:1px solid #aaa;
-border-radius:8px;
-font-size:16px;
-}
-
-.container{padding:12px}
-
-h2{
-color:#167c36;
-text-align:center;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
-
-.crop{
-background:white;
-padding:15px 8px;
-border-radius:10px;
-text-align:center;
-border:1px solid #c8e6c9;
-font-size:16px;
-cursor:pointer;
-}
-
-.crop:active{background:#dcedc8}
-
-.details{
-background:white;
-padding:17px;
-margin-top:15px;
-border-radius:12px;
-border:2px solid #4caf50;
-line-height:1.8;
-display:none;
-}
-
-.details h3{color:#167c36}
-
-.details h4{
-margin-bottom:2px;
-color:#2e7d32;
+.container{
+ padding:15px;
+ max-width:850px;
+ margin:auto;
 }
 
 .section{
-background:white;
-padding:17px;
-margin:15px 0;
-border-radius:12px;
+ display:none;
 }
 
-input,textarea{
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid #aaa;
-border-radius:8px;
-font-size:15px;
+.section.active{display:block}
+
+.card{
+ background:white;
+ border-radius:12px;
+ padding:15px;
+ margin:12px 0;
+ box-shadow:0 2px 7px #0001;
+}
+
+.card h3{color:#167c36}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+
+.item{
+ background:white;
+ padding:18px 8px;
+ border-radius:12px;
+ text-align:center;
+ cursor:pointer;
+ box-shadow:0 2px 6px #0001;
+}
+
+.item span{
+ font-size:30px;
+ display:block;
+ margin-bottom:8px;
+}
+
+input,select{
+ width:100%;
+ padding:12px;
+ margin:8px 0;
+ border:1px solid #bbb;
+ border-radius:8px;
+ font-size:15px;
+}
+
+.action{
+ background:#167c36;
+ color:white;
+ border:0;
+ padding:12px 18px;
+ border-radius:8px;
+ cursor:pointer;
+ margin:5px 0;
+}
+
+.back{
+ background:#777;
+ color:white;
+ border:0;
+ padding:9px 15px;
+ border-radius:7px;
 }
 
 img{
-max-width:100%;
-border-radius:10px;
+ max-width:100%;
+ border-radius:10px;
 }
 
 footer{
-background:#167c36;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:20px;
+ background:#105c29;
+ color:white;
+ text-align:center;
+ padding:18px;
+ margin-top:25px;
 }
 
-@media(min-width:650px){
-.grid{grid-template-columns:repeat(4,1fr)}
+.price{
+ color:#167c36;
+ font-size:20px;
+ font-weight:bold;
 }
+
+a{color:#167c36}
 </style>
 </head>
 
@@ -135,292 +138,362 @@ margin-top:20px;
 
 <header>
 <h1>🌱 Agri Smart Sri Lanka</h1>
-<p>ශ්‍රී ලංකාවේ කෘෂිකර්මාන්තයට නව තාක්ෂණය</p>
+<p>නවීන කෘෂිකාර්මික තොරතුරු මධ්‍යස්ථානය</p>
 </header>
 
 <nav>
-<button onclick="showCategory('vegetables')">🥬 එළවළු</button>
-<button onclick="showCategory('fruits')">🍉 පලතුරු</button>
-<button onclick="showDisease()">🦠 රෝග හඳුනාගැනීම</button>
+<button onclick="show('home')">මුල් පිටුව</button>
+<button onclick="show('vegetables')">එළවළු</button>
+<button onclick="show('fruits')">පලතුරු</button>
+<button onclick="show('diseases')">රෝග</button>
+<button onclick="show('prices')">මිල ගණන්</button>
+<button onclick="show('photo')">ඡායාරූප</button>
+<button onclick="show('advice')">උපදෙස්</button>
 </nav>
-
-<input class="search"
-id="search"
-placeholder="බෝගයක නම සොයන්න..."
-oninput="searchCrop()">
 
 <div class="container">
 
-<h2 id="title">🥬 එළවළු වගාව</h2>
+<!-- HOME -->
 
-<div class="grid" id="cropList"></div>
+<div id="home" class="section active">
 
-<div class="details" id="details"></div>
+<div class="card">
+<h2>ආයුබෝවන්! 🌿</h2>
+<p>කෘෂිකර්මාන්තයට අවශ්‍ය සියලු තොරතුරු එකම තැනකින් ලබාගන්න.</p>
+</div>
 
-<div class="section" id="diseaseSection">
+<div class="grid">
 
-<h2>🦠 බෝග රෝග පරීක්ෂාව</h2>
+<div class="item" onclick="show('vegetables')">
+<span>🥬</span>එළවළු වගාව
+</div>
 
-<p>රෝගය ඇති බෝගයේ ඡායාරූපයක් තෝරන්න.</p>
+<div class="item" onclick="show('fruits')">
+<span>🍎</span>පලතුරු වගාව
+</div>
 
-<input type="file"
-id="photo"
-accept="image/*"
-onchange="previewImage(event)">
+<div class="item" onclick="show('diseases')">
+<span>🦠</span>රෝග තොරතුරු
+</div>
+
+<div class="item" onclick="show('prices')">
+<span>💰</span>වෙළෙඳපොළ මිල
+</div>
+
+<div class="item" onclick="show('photo')">
+<span>📸</span>ඡායාරූප පරීක්ෂාව
+</div>
+
+<div class="item" onclick="show('advice')">
+<span>🌾</span>ගොවි උපදෙස්
+</div>
+
+</div>
+</div>
+
+<!-- VEGETABLES -->
+
+<div id="vegetables" class="section">
+<h2>🥬 එළවළු වර්ග</h2>
+<input id="vsearch" placeholder="එළවළුවක් සොයන්න..." oninput="filterItems('vlist','vsearch')">
+<div class="grid" id="vlist"></div>
+</div>
+
+<!-- FRUITS -->
+
+<div id="fruits" class="section">
+<h2>🍎 පලතුරු වර්ග</h2>
+<input id="fsearch" placeholder="පලතුරක් සොයන්න..." oninput="filterItems('flist','fsearch')">
+<div class="grid" id="flist"></div>
+</div>
+
+<!-- DETAILS -->
+
+<div id="details" class="section">
+<button class="back" onclick="historyBack()">⬅ ආපසු</button>
+<div class="card" id="detailContent"></div>
+</div>
+
+<!-- DISEASES -->
+
+<div id="diseases" class="section">
+<h2>🦠 බෝග රෝග තොරතුරු</h2>
+
+<div class="card">
+<h3>🍅 තක්කාලි කොළ කොඩවීම</h3>
+<p>ලක්ෂණ: කොළ ඉහළට හෝ පහළට වක්‍ර වීම, කහ පැහැ වීම සහ වර්ධනය අඩුවීම.</p>
+<p>හේතු: වෛරස් රෝග සහ සුදු මැස්සා වැනි කෘමීන්.</p>
+<p>පාලනය: රෝගී පැළ ඉවත් කිරීම, වාහක කෘමීන් පාලනය සහ නිරෝගී පැළ භාවිතය.</p>
+</div>
+
+<div class="card">
+<h3>🥒 පිපිඤ්ඤා කෝණාකාර රෝගය</h3>
+<p>ලක්ෂණ: පත්‍රවල සුදු පැහැති පිටි වැනි පැල්ලම් ඇතිවීම.</p>
+<p>පාලනය: වාතාශ්‍රය හොඳින් ලබාදීම සහ නිර්දේශිත දිලීරනාශක භාවිතය.</p>
+</div>
+
+<div class="card">
+<h3>🍆 වම්බටු පත්‍ර ලප රෝගය</h3>
+<p>ලක්ෂණ: පත්‍රවල දුඹුරු හෝ කළු පැහැති ලප ඇතිවීම.</p>
+<p>පාලනය: ආසාදිත පත්‍ර ඉවත් කිරීම සහ නිර්දේශිත රෝග පාලන ක්‍රම භාවිතය.</p>
+</div>
+
+<div class="card">
+<h3>🌶️ මිරිස් කොළ කොඩවීම</h3>
+<p>ලක්ෂණ: කොළ කුඩා වීම, රැලි වැටීම සහ පැළයේ වර්ධනය අඩුවීම.</p>
+<p>පාලනය: රෝග වාහක කෘමීන් පාලනය කිරීම සහ රෝගී පැළ ඉවත් කිරීම.</p>
+</div>
+
+<p>⚠️ රෝග පාලනයට පෙර නිවැරදි රෝග හඳුනාගැනීම සඳහා කෘෂිකර්ම නිලධාරියකුගෙන් උපදෙස් ලබාගන්න.</p>
+</div>
+
+<!-- PRICES -->
+
+<div id="prices" class="section">
+
+<h2>💰 දෛනික වෙළෙඳපොළ මිල ගණන්</h2>
+
+<div class="card">
+<p>ශ්‍රී ලංකාවේ දෛනික එළවළු සහ පලතුරු මිල ගණන් පරීක්ෂා කරන්න.</p>
+
+<label>වෙළෙඳපොළ තෝරන්න</label>
+<select id="market">
+<option>දඹුල්ල</option>
+<option>පෑලියගොඩ</option>
+<option>නාරාහේන්පිට</option>
+<option>බණ්ඩාරවෙල</option>
+<option>මීගොඩ</option>
+</select>
+
+<button class="action" onclick="openPrices()">මිල ගණන් බලන්න</button>
+</div>
+
+<div class="card">
+<h3>📊 නිල මිල තොරතුරු</h3>
+<p>HARTI දෛනික වෙළෙඳපොළ මිල වාර්තා</p>
+<a href="https://www.harti.gov.lk/daily-price.php" target="_blank">
+HARTI මිල වාර්තාව බලන්න ↗
+</a>
+</div>
+
+<div class="card">
+<h3>🏛️ මධ්‍යම බැංකු තොරතුරු</h3>
+<a href="https://www.cbsl.gov.lk/" target="_blank">
+ශ්‍රී ලංකා මහ බැංකුව ↗
+</a>
+</div>
+
+<p>සටහන: නිල වෙබ් අඩවිවලින් ලබාගන්නා මිල ගණන් පරීක්ෂා කරන්න. මෙම App එකේ ස්වයංක්‍රීය සජීවී මිල දත්ත සම්බන්ධතාව තවම සකස් කර නැත.</p>
+
+</div>
+
+<!-- PHOTO -->
+
+<div id="photo" class="section">
+
+<h2>📸 බෝග ඡායාරූප පරීක්ෂාව</h2>
+
+<div class="card">
+<p>රෝග ලක්ෂණ ඇති පත්‍රයක හෝ බෝගයක ඡායාරූපයක් තෝරන්න.</p>
+
+<input type="file" accept="image/*" id="plantImage" onchange="previewImage(event)">
 
 <img id="preview" style="display:none">
 
-<h3>රෝග ලක්ෂණ විස්තර කරන්න</h3>
+<p>ඡායාරූපය සමඟ පහත තොරතුරුද සලකා බලන්න.</p>
 
-<textarea id="symptoms"
-rows="4"
-placeholder="උදා: කොළ කහ පැහැවීම, කොළවල ලප ඇතිවීම..."></textarea>
+<textarea id="symptoms" placeholder="බෝගයේ රෝග ලක්ෂණ විස්තර කරන්න..." style="width:100%;height:90px;padding:10px"></textarea>
 
-<button onclick="checkDisease()">විස්තර පරීක්ෂා කරන්න</button>
+<button class="action" onclick="checkPhoto()">තොරතුරු පරීක්ෂා කරන්න</button>
 
-<div id="result"></div>
+<div id="photoResult"></div>
+</div>
 
-<p style="font-size:13px;color:#666">
-සටහන: ඡායාරූපය මෙහි පෙන්වීම පමණක් සිදු වේ.
-නිවැරදි රෝග හඳුනාගැනීම සඳහා විශේෂිත AI
-රූප හඳුනාගැනීමේ සේවාවක් සම්බන්ධ කළ යුතුය.
-</p>
+<p>සටහන: මෙම පහසුකම දැනට ඡායාරූපය පෙන්වීම සහ රෝග ලක්ෂණ සටහන් කිරීම සඳහා පමණි. නිවැරදි AI රෝග හඳුනාගැනීම සඳහා වෙනම AI සේවාවක් සම්බන්ධ කළ යුතුය.</p>
+
+</div>
+
+<!-- ADVICE -->
+
+<div id="advice" class="section">
+
+<h2>🌾 කෘෂිකාර්මික උපදෙස්</h2>
+
+<div class="card">
+<h3>🌱 පස සකස් කිරීම</h3>
+<p>බෝගයට සුදුසු පස තෝරාගෙන ජලය බැස යාමට පහසු ලෙස භූමිය සකස් කරන්න.</p>
+</div>
+
+<div class="card">
+<h3>💧 ජල කළමනාකරණය</h3>
+<p>බෝගයේ වර්ධන අවස්ථාව සහ කාලගුණය අනුව අවශ්‍ය ජලය ලබාදෙන්න.</p>
+</div>
+
+<div class="card">
+<h3>🌿 පොහොර භාවිතය</h3>
+<p>පස් පරීක්ෂණයක් සිදුකර බෝගයට ගැළපෙන පොහොර නිර්දේශ අනුව යොදන්න.</p>
+</div>
+
+<div class="card">
+<h3>🐛 පළිබෝධ පාලනය</h3>
+<p>නිතිපතා බෝග පරීක්ෂා කර හානි මුල් අවස්ථාවේදීම හඳුනාගන්න.</p>
+</div>
 
 </div>
 
 </div>
 
 <footer>
-Agri Smart Sri Lanka © 2026
+<p>🌱 Agri Smart Sri Lanka</p>
+<p>ගොවියාගේ දැනුමට නව තාක්ෂණය</p>
 </footer>
 
 <script>
 
 const vegetables = [
-"වට්ටක්කා","තක්කාලි","බණ්ඩක්කා","වම්බටු",
-"මාළු මිරිස්","අමු මිරිස්","කැරට්","බීට්",
-"බෝංචි","ගෝවා","පිපිඤ්ඤා","කරවිල",
-"පතෝල","වැටකොළු","මෑකරල්","රාබු",
-"නෝකෝල්","ලීක්ස්","නිවිති","කංකුං"
+["තක්කාලි","🍅","තක්කාලි වගාවට හොඳින් ජලය බැස යන සාරවත් පසක් සුදුසුය.","පැළ අතර සුදුසු පරතරයක් තබන්න. අවශ්‍ය පරිදි ජලය සහ පොහොර ලබාදෙන්න."],
+["මාළු මිරිස්","🌶️","හොඳින් හිරු එළිය ලැබෙන ස්ථානයක් තෝරාගන්න.","නිසි ජල කළමනාකරණය සහ පළිබෝධ පාලනය සිදුකරන්න."],
+["මිරිස්","🌶️","සාරවත් පසක වගා කළ හැකිය.","පැළවල වර්ධනය නිරීක්ෂණය කරන්න."],
+["වම්බටු","🍆","ජලය බැස යන පසක් සුදුසුය.","නිසි පරතරය සහ පළිබෝධ පාලනය වැදගත්ය."],
+["බණ්ඩක්කා","🥬","උණුසුම් දේශගුණයට ගැළපේ.","නිතිපතා අස්වනු නෙළන්න."],
+["ගෝවා","🥬","සිසිල් දේශගුණය වඩාත් සුදුසුය.","නිසි ජලය සහ පොහොර ලබාදෙන්න."],
+["කැරට්","🥕","ගැඹුරු, ලිහිල් පසක් අවශ්‍ය වේ.","ගල් සහිත පස වළක්වන්න."],
+["බීට්","🫜","කාබනික ද්‍රව්‍ය සහිත පසක් සුදුසුය.","පසෙහි තෙතමනය පවත්වාගන්න."],
+["ලීක්ස්","🌱","සිසිල් දේශගුණය සුදුසුය.","පසෙහි තෙතමනය පවත්වාගන්න."],
+["ගෝවා මල්","🥦","සිසිල් පරිසරයක් සුදුසුය.","නිසි පරතරය පවත්වාගන්න."],
+["බෝංචි","🫘","හොඳින් ජලය බැස යන පසක් සුදුසුය.","ආධාරක අවශ්‍ය විය හැකිය."],
+["මෑ","🫘","හොඳ හිරු එළියක් අවශ්‍ය වේ.","නිසි ලෙස ජලය ලබාදෙන්න."],
+["පිපිඤ්ඤා","🥒","කාබනික ද්‍රව්‍ය සහිත පසක් සුදුසුය.","වැල් පැතිරීමට ඉඩ දෙන්න."],
+["වැටකොළු","🥒","වැල් වර්ගයක් බැවින් ආධාරක සකස් කරන්න.","නිසි ජලය ලබාදෙන්න."],
+["පතෝල","🥒","හොඳින් හිරු එළිය ලැබෙන ස්ථානයක් තෝරන්න.","වැල් සඳහා ආධාරක යොදන්න."],
+["කරවිල","🥒","ජලය බැස යන පසක් සුදුසුය.","වැල් පුහුණු කරන්න."],
+["ලබු","🥒","කාබනික පොහොර සහිත පසක් සුදුසුය.","වැල් සඳහා ඉඩ සලසන්න."],
+["වට්ටක්කා","🎃","විශාල ඉඩකඩක් අවශ්‍ය වේ.","වැල් පැතිරීමට ඉඩ දෙන්න."],
+["රාබු","🥕","ලිහිල් පසක් සුදුසුය.","නිසි ජල සැපයුමක් ලබාදෙන්න."],
+["නෝකෝල්","🥬","සිසිල් පරිසරයක හොඳින් වැඩේ.","නිසි පොහොර ලබාදෙන්න."],
+["නිවිති","🥬","කෙටි කාලීන පලා බෝගයකි.","නිතිපතා ජලය ලබාදෙන්න."],
+["මුකුණුවැන්න","🌿","තෙතමනය සහිත පරිසරයක් සුදුසුය.","නිතිපතා අස්වනු නෙළන්න."],
+["කංකුං","🌿","තෙතමනය සහිත පසක වගා කළ හැකිය.","ජල සැපයුම පවත්වාගන්න."],
+["ගොටුකොළ","🌿","තෙතමනය සහිත පරිසරයක් සුදුසුය.","අර්ධ සෙවණේද වගා කළ හැකිය."],
+["රාබු","🥕","ලිහිල් පසක හොඳින් වැඩේ.","නිසි පරතරය පවත්වාගන්න."],
+["ලූනු","🧅","ජලය බැස යන පසක් සුදුසුය.","අස්වනු නෙළීමට පෙර ජලය පාලනය කරන්න."],
+["සුදු ලූනු","🧄","සුදුසු දේශගුණයක් සහ හොඳින් ජලය බැස යන පසක් අවශ්‍ය වේ.","නිසි පරතරය පවත්වාගන්න."]
 ];
 
 const fruits = [
-"කෙසෙල්","අඹ","පැපොල්","අන්නාසි",
-"පේර","කොමඩු","දෙහි","දොඩම්",
-"දෙළුම්","රඹුටන්","මැංගුස්","අලිගැටපේර",
-"මිදි","අනෝදා","දිවුල්","නෙල්ලි",
-"ජම්බු","ලාවුළු","කාමරංකා","පේර"
+["අඹ","🥭","උණුසුම් දේශගුණය සුදුසුය.","ජලය බැස යන පසක් සහ ප්‍රමාණවත් හිරු එළිය ලබාදෙන්න."],
+["කෙසෙල්","🍌","තෙතමනය සහිත සාරවත් පසක් සුදුසුය.","සුළං හානි අවම කිරීමට සහ ජලය සැපයීමට සැලකිලිමත් වන්න."],
+["පේර","🍐","විවිධ පස් වර්ගවල වගා කළ හැකිය.","නිසි කප්පාදුව සහ පළිබෝධ පාලනය සිදුකරන්න."],
+["පැපොල්","🍈","හොඳින් ජලය බැස යන පසක් සුදුසුය.","ජලය රැඳීම වළක්වන්න."],
+["දොඩම්","🍊","හිරු එළිය සහිත පරිසරයක් සුදුසුය.","නිසි පොහොර සහ ජලය ලබාදෙන්න."],
+["දෙහි","🍋","උණුසුම් දේශගුණයට ගැළපේ.","කප්පාදුව සහ රෝග පාලනය සිදුකරන්න."],
+["අන්නාසි","🍍","ජලය බැස යන පසක් සුදුසුය.","අධික ජලය රැඳීම වළක්වන්න."],
+["කොමඩු","🍉","උණුසුම් කාලගුණය සුදුසුය.","වැල් පැතිරීමට ඉඩ ලබාදෙන්න."],
+["මිදි","🍇","සුදුසු දේශගුණයක් සහ හොඳ ජල බැසයාමක් අවශ්‍යය.","ආධාරක සහ කප්පාදු ක්‍රම භාවිත කරන්න."],
+["අලිගැටපේර","🥑","ගැඹුරු පසක් සහ හොඳ ජල බැසයාමක් අවශ්‍යය.","ජලය රැඳීම වළක්වන්න."],
+["රඹුටන්","🍒","තෙතමනය සහිත උණුසුම් පරිසරයක් සුදුසුය.","තරුණ පැළවලට ආරක්ෂාව ලබාදෙන්න."],
+["දූරියන්","🍈","උණුසුම් තෙතමනය සහිත පරිසරයක් සුදුසුය.","හොඳින් ජලය බැස යන පසක් තෝරන්න."],
+["කොස්","🌳","විශාල ඉඩකඩක් අවශ්‍ය වේ.","පැළය ආරක්ෂා කර නිසි පෝෂණය ලබාදෙන්න."],
+["දෙළුම්","🍎","උණුසුම් දේශගුණය සුදුසුය.","අධික ජලය සැපයීමෙන් වළකින්න."],
+["පැෂන් ෆෘට්","🍇","වැල් වර්ගයක් බැවින් ආධාරක අවශ්‍යය.","නිසි කප්පාදුව සිදුකරන්න."],
+["නෙල්ලි","🍏","උණුසුම් දේශගුණයට ගැළපේ.","තරුණ පැළවලට ජලය ලබාදෙන්න."],
+["ලාවුලු","🍈","උණුසුම් දේශගුණය සුදුසුය.","නිසි පරතරය තබන්න."],
+["වෙරළු","🍏","තෙතමනය සහිත පරිසරයක හොඳින් වැඩේ.","තරුණ පැළ ආරක්ෂා කරන්න."],
+["බෙලි","🍈","වියළි දේශගුණයට ඔරොත්තු දෙයි.","මුල් අවධියේදී ජලය ලබාදෙන්න."]
 ];
 
-let current="vegetables";
+let previousSection = "home";
 
-function showCategory(type){
-
-current=type;
-
-document.getElementById("search").value="";
-
-document.getElementById("title").innerText=
-type==="vegetables"?"🥬 එළවළු වගාව":"🍉 පලතුරු වගාව";
-
-document.getElementById("details").style.display="none";
-
-displayCrops(type==="vegetables"?vegetables:fruits);
+function show(id){
+ if(id==="details") previousSection = currentSection;
+ document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ currentSection=id;
+ window.scrollTo(0,0);
 }
 
-function displayCrops(list){
+let currentSection="home";
 
-let html="";
-
-list.forEach((crop,index)=>{
-
-html+=`
-<div class="crop" onclick="showDetails('${crop}')">
-🌱<br>
-${crop}
-</div>
-`;
-
-});
-
-document.getElementById("cropList").innerHTML=html;
+function historyBack(){
+ show(previousSection);
 }
 
-function showDetails(crop){
-
-let box=document.getElementById("details");
-
-if(box.style.display==="block" &&
-box.dataset.crop===crop){
-
-box.style.display="none";
-return;
-
+function createItems(data,id){
+ document.getElementById(id).innerHTML=data.map((v,i)=>`
+ <div class="item" onclick="showDetail('${id}',${i})">
+ <span>${v[1]}</span>${v[0]}
+ </div>`).join("");
 }
 
-box.dataset.crop=crop;
+function showDetail(type,index){
+ let data=type==="vlist"?vegetables:fruits;
+ let v=data[index];
 
-box.style.display="block";
+ previousSection=currentSection;
 
-box.innerHTML=`
+ document.getElementById("detailContent").innerHTML=`
+ <h2>${v[1]} ${v[0]}</h2>
+ <h3>🌱 වගා තොරතුරු</h3>
+ <p>${v[2]}</p>
+ <h3>🌿 වගා කළමනාකරණය</h3>
+ <p>${v[3]}</p>
+ <h3>💧 අවධානය යොමු කළ යුතු දේ</h3>
+ <p>පසෙහි තෙතමනය, කාලගුණය සහ බෝගයේ වර්ධනය අනුව වගා කටයුතු සිදුකරන්න.</p>
+ <button class="back" onclick="historyBack()">⬅ ආපසු</button>
+ `;
 
-<h3>🌱 ${crop} වගාව පිළිබඳ විස්තර</h3>
-
-<h4>1. සුදුසු වගා කාලය</h4>
-<p>ප්‍රදේශයේ දේශගුණය සහ වර්ෂාපතනය අනුව
-සුදුසු වගා කාලය තෝරාගන්න.</p>
-
-<h4>2. සුදුසු ප්‍රදේශ</h4>
-<p>දේශගුණය, පස සහ ජල පහසුකම් අනුව
-සුදුසු ප්‍රදේශය තෝරාගන්න.</p>
-
-<h4>3. බීජ තෝරාගැනීම</h4>
-<p>සහතික කළ හොඳ තත්ත්වයේ බීජ
-භාවිතා කරන්න. බීජ ප්‍රමාණය බෝගයේ
-ප්‍රභේදය හා වගා ක්‍රමය අනුව වෙනස් වේ.</p>
-
-<h4>4. පස සකස් කිරීම</h4>
-<p>හොඳින් ජලය බැස යන සාරවත් පසක්
-තෝරා පස හොඳින් සකස් කරන්න.</p>
-
-<h4>5. පොහොර යෙදීම</h4>
-<p>පස් පරීක්ෂාව සහ කෘෂිකර්ම දෙපාර්තමේන්තුවේ
-නිර්දේශ අනුව මූලික හා මතුපිට පොහොර
-යොදන්න.</p>
-
-<h4>6. ජලය සැපයීම</h4>
-<p>බෝගයේ වර්ධන අවධිය හා පසෙහි තෙතමනය
-අනුව අවශ්‍ය ජලය ලබාදෙන්න.</p>
-
-<h4>7. රෝග හා කෘමි හානි</h4>
-<p>කොළ කහවීම, ලප ඇතිවීම, මුල් කුණුවීම
-සහ කෘමි හානි නිතර පරීක්ෂා කරන්න.</p>
-
-<h4>8. රෝග පාලනය</h4>
-<p>රෝගය නිවැරදිව හඳුනාගෙන අදාළ
-කෘෂිකර්ම උපදෙස් අනුව පාලනය කරන්න.</p>
-
-<h4>9. අස්වැන්න</h4>
-<p>බෝගයේ ප්‍රභේදය අනුව අස්වැන්න නෙළන
-කාලය වෙනස් වේ. සුදුසු පරිණත අවධියේදී
-අස්වැන්න නෙළන්න.</p>
-
-<h4>10. වෙළඳපොළ මිල</h4>
-<p>දෛනික වෙළඳපොළ මිල ප්‍රදේශය හා
-කාලය අනුව වෙනස් වේ.</p>
-
-<p><b>වැදගත්:</b> නිශ්චිත පොහොර ප්‍රමාණ,
-බීජ ප්‍රමාණ හා වගා කාලයන් සඳහා
-කෘෂිකර්ම දෙපාර්තමේන්තුවේ බෝග
-නිර්දේශ පරීක්ෂා කරන්න.</p>
-
-`;
-
-box.scrollIntoView({behavior:"smooth",block:"nearest"});
-
+ show("details");
 }
 
-function searchCrop(){
+function filterItems(list,search){
+ let value=document.getElementById(search).value.toLowerCase();
+ let data=list==="vlist"?vegetables:fruits;
 
-let value=document.getElementById("search").value;
+ let filtered=data.filter(v=>v[0].toLowerCase().includes(value));
 
-let list=current==="vegetables"?vegetables:fruits;
-
-let filtered=list.filter(c=>c.includes(value));
-
-displayCrops(filtered);
-
-}
-
-function showDisease(){
-
-document.getElementById("diseaseSection")
-.scrollIntoView({behavior:"smooth"});
-
+ createItems(filtered,list);
 }
 
 function previewImage(event){
+ let file=event.target.files[0];
+ if(!file)return;
 
-let file=event.target.files[0];
+ let reader=new FileReader();
 
-if(file){
+ reader.onload=function(){
+ let img=document.getElementById("preview");
+ img.src=reader.result;
+ img.style.display="block";
+ };
 
-let reader=new FileReader();
-
-reader.onload=function(e){
-
-let img=document.getElementById("preview");
-
-img.src=e.target.result;
-
-img.style.display="block";
-
-};
-
-reader.readAsDataURL(file);
-
+ reader.readAsDataURL(file);
 }
 
+function checkPhoto(){
+ let img=document.getElementById("plantImage").files[0];
+ let symptoms=document.getElementById("symptoms").value;
+
+ if(!img){
+ alert("කරුණාකර ඡායාරූපයක් තෝරන්න.");
+ return;
+ }
+
+ document.getElementById("photoResult").innerHTML=`
+ <div class="card">
+ <h3>📋 ඔබ ඇතුළත් කළ තොරතුරු</h3>
+ <p>ඡායාරූපය සාර්ථකව ඇතුළත් කර ඇත.</p>
+ <p>රෝග ලක්ෂණ: ${symptoms || "තොරතුරු ඇතුළත් කර නැත."}</p>
+ <p>නිවැරදි රෝග විනිශ්චය සඳහා කෘෂිකර්ම නිලධාරියකුට ඡායාරූපය පෙන්වන්න.</p>
+ </div>`;
 }
 
-function checkDisease(){
-
-let text=document.getElementById("symptoms").value;
-
-let result=document.getElementById("result");
-
-if(text.trim()===""){
-
-alert("කරුණාකර රෝග ලක්ෂණ ඇතුළත් කරන්න.");
-
-return;
-
+function openPrices(){
+ let market=document.getElementById("market").value;
+ window.open("https://www.harti.gov.lk/daily-price.php","_blank");
 }
 
-let advice="";
-
-if(text.includes("කහ") || text.includes("කහව")){
-
-advice="කොළ කහවීමට පෝෂක ඌනතා, ජල ගැටලු හෝ රෝග හේතු විය හැක. පස සහ මුල් පරීක්ෂා කරන්න.";
-
-}
-
-else if(text.includes("ලප")){
-
-advice="කොළවල ලප දිලීර හෝ බැක්ටීරියා රෝගයක් නිසා ඇතිවිය හැක. බලපෑමට ලක්වූ කොළ පරීක්ෂා කරන්න.";
-
-}
-
-else if(text.includes("කුණුව")){
-
-advice="මුල් හෝ කඳ කුණුවීම ජලය රැඳීම හෝ රෝගයක් නිසා විය හැක. ජල බැසයාම පරීක්ෂා කරන්න.";
-
-}
-
-else{
-
-advice="මෙම ලක්ෂණය නිවැරදිව හඳුනාගැනීමට බෝගය සහ රෝග ලක්ෂණ පිළිබඳ වැඩිදුර පරීක්ෂාවක් අවශ්‍යයි.";
-
-}
-
-result.innerHTML=`
-
-<div class="details" style="display:block">
-
-<h3>🔍 මූලික පරීක්ෂණ ප්‍රතිඵලය</h3>
-
-<p>${advice}</p>
-
-<p>නිවැරදි රෝග හඳුනාගැනීම සඳහා
-කෘෂිකර්ම උපදේශකවරයෙකුගේ සහාය ලබාගන්න.</p>
-
-</div>
-
-`;
-
-}
-
-showCategory("vegetables");
+createItems(vegetables,"vlist");
+createItems(fruits,"flist");
 
 </script>
 
